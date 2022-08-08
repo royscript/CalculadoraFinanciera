@@ -1,36 +1,29 @@
 import * as React from 'react';
 import 'react-native-gesture-handler';
-import { Button, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
+import DepositoPlazoFijo from './src/DepositoPlazoFijo';
 
-function HomeScreen({ navigation }) {
+function Inicio() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
+      <Text>Bienvenid@, seleccione una opcion del menú para poder realizar los calculos correspondientes.</Text>
     </View>
   );
 }
 
-function NotificationsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
-  );
-}
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+      <Drawer.Navigator initialRouteName="Inicio">
+        <Drawer.Screen name="Inicio" component={Inicio} />
+        <Drawer.Screen name="Deposito Plazo Fijo" component={DepositoPlazoFijo} initialParams={{ tipo: 'Deposito Plazo Fijo' }}/>
+        <Drawer.Screen name="Deposito a Plazo Renovable" component={DepositoPlazoFijo} initialParams={{ tipo: 'Tasa Interes Simple' }}/>
+        <Drawer.Screen name="Tasa Interes Simple" component={DepositoPlazoFijo} initialParams={{ tipo: 'Tasa Interes Simple' }}/>
       </Drawer.Navigator>
     </NavigationContainer>
   );
